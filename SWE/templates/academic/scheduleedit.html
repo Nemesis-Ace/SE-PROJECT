@@ -1,0 +1,103 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Edit Schedule{% endblock %}
+<link rel="stylesheet" href="{% block css %} {% static 'styling_semresults.css' %} {% endblock %}">
+
+{% block content %}
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+    </div>
+
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="#">LIMBO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/logout">
+                    <img src="{% static 'images/logout.png' %}" alt="" style="width: 40px;">
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="wrapper">
+    <div class="sidebar">
+        <h3><b>WELCOME</b></h3>
+        <div class="user-info">
+            <p>{{ user.get_username }}</p>
+            <h2>{{ user.get_full_name }}</h2>
+            <p>{{ group }}</p>
+        </div>
+        <ul>
+            <li><a href="/dashboard">Dashboard</a></li>
+            <li><a href="/markupdate">Award Marks</a></li>
+              <li><a href="/viewschedule">View Schedule</a></li>
+            {% if isHoD %}
+              <li><a href="/scheduleupdate">Update Schedule</a></li>
+            {% elif isAddOnC %}
+            <li><a href="/manageaddon">Manage Addon</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+<div class="container">
+    <div class="card" ,
+        style="border-radius: 15px; background-color: #343A40;width: 900px; text-align: center; margin-top: 5%; margin-left: 33%; color: coral;">
+
+        <form method="POST" class="post-form" action="/updateschedule/{{schedule.id}}">
+            {% csrf_token %}
+            <br>
+            <div class="form-group row" , style="margin-left: 30%;">
+                <label class="col-sm-1 col-form-label"></label>
+                <div class="col-sm-4">
+                    <h3>Update Details</h3>
+                </div>
+            </div>
+            <div class="form-group row" , style="margin: auto;">
+                <label class="col-sm-2 col-form-label">Instructor ID:</label>
+                <div class="col-sm-4" , style="margin: auto;">
+                    <input type="text" name="iid" id="iid" required maxlength="20" value="{{ schedule.iid }}" />
+                </div>
+            </div>
+            <div class="form-group row" , style="margin: auto;">
+                <label class="col-sm-2 col-form-label">Day:</label>
+                <div class="col-sm-4" , style="margin: auto;">
+                    <input type="text" name="day" id="day" required maxlength="100" value="{{ schedule.day }}" />
+                </div>
+            </div>
+            <div class="form-group row" , style="margin: auto;">
+                <label class="col-sm-2 col-form-label">Time:</label>
+                <div class="col-sm-4" , style="margin: auto;">
+                    <input type="int" name="time" id="time" required maxlength="254" value="{{ schedule.time }}" />
+                </div>
+            </div>
+            <div class="form-group row" , style="margin: auto;">
+                <label class="col-sm-2 col-form-label">Type:</label>
+                <div class="col-sm-4" , style="margin: auto;">
+                    <input type="int" name="type" id="type" required maxlength="254" value="{{ schedule.type }}" />
+                </div>
+            </div>
+
+
+            <div class="form-group row" , style="margin: auto;">
+                <label class="col-sm-1 col-form-label" , style="margin: auto;"></label>
+                <div class="col-sm-4" , style="margin: auto;">
+                    <button type="submit" class="btn btn-lg btn-outline-success"
+                        style="margin-top: 5%; margin-left: -140%; margin-bottom: 5%;">Update</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

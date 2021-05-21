@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add Dues{% endblock %}
+<link rel="stylesheet" href="{% block css %} {% static 'styling_semresults.css' %} {% endblock %}">
+
+{% block content %}
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+    </div>
+
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="#">LIMBO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="logout">
+                    <img src="{% static 'images/logout.png' %}" alt="" style="width: 40px;">
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="wrapper">
+    <div class="sidebar">
+        <h3><b>WELCOME</b></h3>
+        <div class="user-info">
+            <p>{{ user.get_username }}</p>
+            <h2>{{ user.get_full_name }}</h2>
+            <p>{{ group }}</p>
+        </div>
+        <ul>
+          <li><a href="/dashboard">Dashboard</a></li>
+          <li><a href="/defaultlist">Default List</a></li>
+          <li><a href="/duelist">Due List</a></li>
+          {% if isWarden %}
+        <li><a href="/allotroom">Hostel Room Allotment</a></li>
+        {% endif %}
+        {% if isLibrarian %}
+      <li><a href="/loanlist">Loan List</a></li>
+      {% endif %}
+
+        </ul>
+    </div>
+</div>
+
+<div class="container">
+    <div class="card" ,
+        style="border-radius: 15px; background-color: #343A40;width: 900px; text-align: center; margin-top: 5%; margin-left: 33%; color: coral;">
+
+        <form method="POST" class="post-form" >
+            {% csrf_token %}
+            <br>
+            <div class="form-group row" , style="margin-left: 30%;">
+                <label class="col-sm-1 col-form-label"></label>
+                <div class="col-sm-4">
+                    <h3>Add New Record</h3>
+                </div>
+            </div>
+            <div class="form-group row" , style="margin: auto;">
+                <label class="col-sm-2 col-form-label">Department:</label>
+                <div class="col-sm-4" , style="margin: auto;">
+                    <input type="text" name="department" id="department" required maxlength="20" value="{{ dept }}" readonly />
+                </div>
+            </div>
+            <div class="form-group row" , style="margin: auto;">
+                <label class="col-sm-2 col-form-label">Student ID:</label>
+                <div class="col-sm-4" , style="margin: auto;">
+                    <input type="text" name="sid" id="sid" required maxlength="100" />
+                </div>
+            </div>
+            <div class="form-group row" , style="margin: auto;">
+                <label class="col-sm-2 col-form-label">Amount(in Rs.):</label>
+                <div class="col-sm-4" , style="margin: auto;">
+                    <input type="int" name="amount" id="amount" required maxlength="25"  />
+                </div>
+            </div>
+
+
+
+
+            <div class="form-group row" , style="margin: auto;">
+                <label class="col-sm-1 col-form-label" , style="margin: auto;"></label>
+                <div class="col-sm-4" , style="margin: auto;">
+                    <button type="submit" class="btn btn-lg btn-outline-success"
+                        style="margin-top: 5%; margin-left: -140%; margin-bottom: 5%;">Add</button>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+{% endblock %}

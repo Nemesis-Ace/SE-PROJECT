@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Login{% endblock %}
+<link rel="stylesheet" href="{% block css %} {% static 'styling_login.css' %} {% endblock %}">
+
+{% block content %}
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+    </div>
+
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="#" style="color: coral;">LIMBO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="/admin/"></a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<form class="box" method="post">
+    <h1>Login</h1>
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {{ form.username }}
+    {{ form.password }}
+    </div>
+    <button type="submit" class="btn btn-outline-success">Login</button>
+</form>
+
+{% endblock %}

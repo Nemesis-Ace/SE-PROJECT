@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Results{% endblock %}
+<link rel="stylesheet" href="{% block css %} {% static 'styling_semresults.css' %} {% endblock %}">
+
+{% block content %}
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+    </div>
+
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="#" style="color: coral;">LIMBO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="logout">
+                    <img src="{% static 'images/logout.png' %}" alt="" style="width: 40px;">
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="wrapper">
+    <div class="sidebar">
+        <h3><b>WELCOME</b></h3>
+        <div class="user-info">
+            <p>{{ user.get_username }}</p>
+            <h2>{{ user.get_full_name }}</h2>
+            <p>{{ sem }} Semester</p>
+        </div>
+        <ul>
+            <li><a href="dashboard">Dashboard</a></li>
+            <li><a href="maincourse">Course Registration</a></li>
+            <li><a href="addon">Add-On Course Registration</a></li>
+            <li><a href="semresults">Semester Results</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<table class="table table-bordered table-dark" ,
+    style="width: 900px; text-align: center; margin-top: 5%; margin-left: 28%; color: coral;">
+    <tr id="header" style="text-align: left;">
+        <th>Sl No.</th>
+        <th>Course id</th>
+        <th>Name</th>
+        <th>Marks</th>
+
+    </tr>
+
+    {% for mark in result %}
+
+    <tr style="text-align: left;">
+        <td>{{forloop.counter}}</td>
+        <td>{{mark.course_id}} </td>
+        <td>{{mark.course_name}} </td>
+        <td>{{mark.score}} </td>
+    </tr>
+
+    {% endfor %}
+</table>
+
+
+{% endblock %}

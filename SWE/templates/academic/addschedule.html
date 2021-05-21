@@ -1,0 +1,65 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}Add Schedule{% endblock %}
+<link rel="stylesheet" href="{% block css %} {% static 'styling_semresults.css' %} {% endblock %}">
+
+{% block content %}
+
+<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+    </div>
+
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="#">LIMBO</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="logout">
+                    <img src="{% static 'images/logout.png' %}" alt="" style="width: 40px;">
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="wrapper">
+    <div class="sidebar">
+        <h3><b>WELCOME</b></h3>
+        <div class="user-info">
+            <p>{{ user.get_username }}</p>
+            <h2>{{ user.get_full_name }}</h2>
+            <p>{{ group }}</p>
+        </div>
+        <ul>
+            <li><a href="dashboard">Dashboard</a></li>
+            <li><a href="markupdate">Award Marks</a></li>
+              <li><a href="viewschedule">View Schedule</a></li>
+            {% if isHoD %}
+              <li><a href="scheduleupdate">Update Schedule</a></li>
+            {% elif isAddOnC %}
+            <li><a href="manageaddon">Manage Addon</a></li>
+            {% endif %}
+        </ul>
+    </div>
+</div>
+
+<div class="container">
+    <div class="card" , style="background-color: #343A40;width: 900px; text-align: center; margin-top: 5%; margin-left: 33%; color: coral;">
+
+
+  <form method="post">
+  {{form.as_p}}
+  {% csrf_token %}
+  <input type="submit" class="btn btn-outline-success" value="Submit">
+</form>
+
+
+    </div>
+</div>
+
+{% endblock %}
